@@ -18,6 +18,10 @@ export default async function ProductsPage({
     currentPage * limit,
   );
 
+  if (!allProducts) {
+    return <div className="container">No products found</div>;
+  }
+
   return (
     <div className="container">
       <h1 className="products-title">Products</h1>
@@ -29,20 +33,16 @@ export default async function ProductsPage({
       <div className="pagination">
         <Link
           href={`/products?page=${currentPage - 1}`}
-          className={currentPage <= 1 ? "disabled" : ""}
+          className={`page-btn ${currentPage <= 1 ? "disabled" : ""}`}
         >
-          Previous
+          &lt;
         </Link>
         <span>{currentPage}</span>
         <Link
           href={`/products?page=${currentPage + 1}`}
-          className={
-            currentPage >= Math.ceil(allProducts.length / limit)
-              ? "disabled"
-              : ""
-          }
+          className={`page-btn ${currentPage >= Math.ceil(allProducts.length / limit) ? "disabled" : ""}`}
         >
-          Next
+          &gt;
         </Link>
       </div>
     </div>

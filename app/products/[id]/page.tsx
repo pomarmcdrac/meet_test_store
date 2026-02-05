@@ -1,24 +1,9 @@
+import AddToCartButton from "@/components/AddToCartButton";
 import { getProductById } from "@/lib/api";
-import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}): Promise<Metadata> {
-  const { id } = await params;
-  const product = await getProductById(Number(id));
-
-  return {
-    title: `${product.title} - Meet Test Store`,
-    description: product.description,
-    alternates: {
-      canonical: `https://localhost:3000/products/${product.id}`,
-    },
-  };
-}
+export { generateMetadata } from "@/lib/seo";
 
 export default async function ProductPage({
   params,
@@ -67,7 +52,7 @@ export default async function ProductPage({
             <h3>Description</h3>
             <p>{product.description}</p>
           </div>
-          <button>Add to cart</button>
+          <AddToCartButton product={product} />
         </div>
       </div>
       <script

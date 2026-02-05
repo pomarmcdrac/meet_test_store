@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import "../styles/global.css";
+import { CartProvider } from "@/lib/cart";
 import { Nunito } from "next/font/google";
-import "@/styles/global.css";
 import Header from "@/components/Header";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Meet Test Store",
@@ -21,8 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito.className} container`}>
-        <Header />
-        {children}
+        <CartProvider>
+          <Header />
+          <main>{children}</main>
+        </CartProvider>
       </body>
     </html>
   );

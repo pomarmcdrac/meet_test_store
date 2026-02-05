@@ -6,6 +6,8 @@ import { BASE_URL } from "@/lib/seo";
 
 export { generateMetadata } from "@/lib/seo";
 
+export const dynamic = "force-dynamic";
+
 export default async function ProductPage({
   params,
 }: {

@@ -1,8 +1,10 @@
 import { Product } from "../type/product";
 
 const API_HEADERS = {
+  Accept: "application/json",
+  "Content-Type": "application/json",
   "User-Agent":
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
 };
 
 export async function getProducts(limit?: number): Promise<Product[]> {
@@ -11,7 +13,7 @@ export async function getProducts(limit?: number): Promise<Product[]> {
 
   try {
     const res = await fetch(url, {
-      next: { revalidate: 3600 }, // Cache results for 1 hour
+      cache: "no-store",
       headers: API_HEADERS,
     });
 
@@ -34,7 +36,7 @@ export async function getProductById(id: number): Promise<Product> {
 
   try {
     const res = await fetch(url, {
-      next: { revalidate: 3600 },
+      cache: "no-store",
       headers: API_HEADERS,
     });
 

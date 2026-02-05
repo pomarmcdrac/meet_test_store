@@ -1,19 +1,21 @@
 # Frontend Developer – Prueba Técnica (30 minutos)
- 
+
 ## Objetivo
- 
+
 Construir un mini‑MVP en **Next.js 14+ (App o Pages Router)** con **TypeScript** que consuma una **API pública real**, que renderice:
+
 - Lista de productos (PLP)
 - Detalle de producto (PDP)
 - Carrito en estado del cliente
- 
+
 Tiempo estimado: **30 minutos**.
- 
+
 ---
- 
+
 ## Alcance mínimo requerido
- 
+
 ### 1) PLP – `/products`
+
 - Consumir una API pública real (elige una):
   - Fake Store API: https://fakestoreapi.com/products
   - OpenFoodFacts: https://world.openfoodfacts.org/api/v2/search?categories_tags_en=snacks&page_size=20
@@ -23,10 +25,11 @@ Tiempo estimado: **30 minutos**.
   - Título
   - Precio
 - Paginación simple (client-side o server-side).
- 
+
 ---
- 
+
 ### 2) PDP – `/products/[id]`
+
 - Cargar datos desde API real, SSR/ISR.
 - Mostrar:
   - Imagen
@@ -37,30 +40,32 @@ Tiempo estimado: **30 minutos**.
   - Breadcrumb básico
   - SEO usando `generateMetadata` (title, description, canonical)
   - JSON‑LD tipo `Product`
- 
+
 ---
- 
+
 ### 3) Add to Cart (estado del cliente)
+
 - Botón “Add to cart” en PDP.
 - Estado en cliente (Context, Zustand o `useState` en layout).
 - Header debe mostrar:
   - Cantidad total
   - Total acumulado
- 
+
 ---
- 
+
 ## Estilos & Accesibilidad
+
 - Estilos libres: CSS Modules, Tailwind, styled-components, etc.
 - UI legible y responsiva básica.
 - Accesibilidad mínima:
   - Alt text
   - Semántica HTML correcta
   - `aria-live="polite"` para notificaciones del carrito
- 
+
 ---
- 
+
 ## Estructura sugerida
- 
+
 ```
 app/
   layout.tsx
@@ -79,59 +84,80 @@ lib/
 styles/
   globals.css
 ```
- 
+
 La estructura puede modificarse si lo consideras mejor.
- 
+
 ---
- 
+
 ## Cómo correr
- 
+
 ```
 npm install
 npm run dev
 ```
- 
+
 Abrir:  
 **http://localhost:3000**
- 
-Opcional: definir  
+
+Opcional: definir
+
 ```
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
 ```
- 
+
 ---
- 
+
 ## Qué debes entregar
+
 - Repositorio (GitHub, GitLab o ZIP).
 - Este README incluido.
 - Al menos **3 commits** con mensajes entendibles.
 - Opcional: GIF o screenshot mostrando PLP → PDP → Add to cart.
- 
+
 ---
- 
+
 ## Criterios de evaluación (100 pts)
- 
-| Área | Puntos | Evaluación |
-|------|--------|------------|
-| Arquitectura Next.js | 20 | Uso correcto de App Router, SSR/ISR y estructura |
-| Consumo de API real | 20 | Fetch SSR, tipado, manejo de errores |
-| SEO & JSON‑LD | 15 | `generateMetadata`, canonical, JSON‑LD válido |
-| UI/UX + Accesibilidad | 15 | Claridad visual, responsive básico, alt/aria |
-| Carrito | 15 | Estado consistente, contador, suma correcta |
-| Código, TS & Git | 15 | Tipos estrictos, orden, commits claros |
-| Bonus | +10 | Paginación SSR, headers de caché, test E2E simple |
- 
+
+| Área                  | Puntos | Evaluación                                        |
+| --------------------- | ------ | ------------------------------------------------- |
+| Arquitectura Next.js  | 20     | Uso correcto de App Router, SSR/ISR y estructura  |
+| Consumo de API real   | 20     | Fetch SSR, tipado, manejo de errores              |
+| SEO & JSON‑LD         | 15     | `generateMetadata`, canonical, JSON‑LD válido     |
+| UI/UX + Accesibilidad | 15     | Claridad visual, responsive básico, alt/aria      |
+| Carrito               | 15     | Estado consistente, contador, suma correcta       |
+| Código, TS & Git      | 15     | Tipos estrictos, orden, commits claros            |
+| Bonus                 | +10    | Paginación SSR, headers de caché, test E2E simple |
+
 ---
- 
+
 ## Checklist de validación rápida
- 
-- [ ] PLP carga productos desde API real  
-- [ ] PDP funciona con SSR/ISR  
-- [ ] SEO implementado correctamente  
-- [ ] JSON‑LD válido en PDP  
-- [ ] Add to cart actualiza el header  
-- [ ] Código limpio, TS estricto  
-- [ ] Commits claros  
- 
+
+- [ ] PLP carga productos desde API real
+- [ ] PDP funciona con SSR/ISR
+- [ ] SEO implementado correctamente
+- [ ] JSON‑LD válido en PDP
+- [ ] Add to cart actualiza el header
+- [ ] Código limpio, TS estricto
+- [ ] Commits claros
+
 ---
- 
+
+## Mi Solución - Notas de Implementación
+
+### Decisiones Técnicas:
+
+- **Next.js 14 (App Router)**: Utilicé Server Components para el renderizado inicial y el SEO, y Client Components solo donde la interactividad es necesaria (Carrito).
+- **SEO & Datos Estructurados**: Implementé [generateMetadata](cci:1://file:///Users/pomarmcdrac/Projects/GitHub/new_empty/meet-test/lib/seo.ts:6:0-21:1) dinámico, URLs canónicas y **JSON-LD** para mejorar el posicionamiento del producto.
+- **Estado Global con Context API**: Manejo del carrito de compras persistente mediante **LocalStorage** para evitar la pérdida de datos al recargar.
+- **Paginación SSR**: La paginación se maneja mediante Query Parameters en la URL, lo que permite que sea compartible y amigable para el SEO.
+
+### Mejoras Realizadas:
+
+- Persistencia del carrito en el navegador.
+- Diseño responsivo completo (Mobile First).
+- Botón de limpieza rápida del carrito.
+- Accesibilidad mejorada con etiquetas semánticas y `aria-live`.
+
+### Demo:
+
+![Flujo PLP a PDP](./demo.gif)

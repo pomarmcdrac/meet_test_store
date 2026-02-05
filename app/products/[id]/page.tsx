@@ -2,6 +2,7 @@ import AddToCartButton from "@/components/AddToCartButton";
 import { getProductById } from "@/lib/api";
 import Link from "next/link";
 import Image from "next/image";
+import { BASE_URL } from "@/lib/seo";
 
 export { generateMetadata } from "@/lib/seo";
 
@@ -23,11 +24,14 @@ export default async function ProductPage({
     name: product.title,
     image: product.image,
     description: product.description,
-    price: product.price,
+    sku: `SKU-${product.id}`,
+    url: `${BASE_URL}/products/${product.id}`,
     offers: {
       "@type": "Offer",
+      url: `${BASE_URL}/products/${product.id}`,
       price: product.price,
       priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
     },
   };
 

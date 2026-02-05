@@ -161,3 +161,7 @@ NEXT_PUBLIC_BASE_URL=http://localhost:3000
 ### Demo:
 
 ![Flujo PLP a PDP](./demo.gif)
+
+**Nota sobre la Demo en Vercel:**
+
+> Debido a restricciones de Firewall de `fakestoreapi.com`, las peticiones desde los servidores de Vercel devuelven un error **403 Forbidden**. He implementado una **Error Boundary** ([app/products/error.tsx](cci:7://file:///Users/pomarmcdrac/Projects/GitHub/new_empty/meet-test/app/products/error.tsx:0:0-0:0)) para manejar este escenario. El proyecto funciona perfectamente en entorno local.

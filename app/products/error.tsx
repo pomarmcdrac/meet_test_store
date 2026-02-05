@@ -14,13 +14,13 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="container">
+    <div className="error-container">
       <h2 className="title">Oops! Something went wrong</h2>
-      <p className="text-gray-600">
+      <p className="error-message">
         We encountered an error while loading the products. This might be due to
         a temporary issue with our external data provider.
       </p>
-      <div className="flex gap-10 justify-center">
+      <div className="flex-group">
         <button onClick={() => reset()} className="page-btn">
           Try again
         </button>
@@ -31,9 +31,7 @@ export default function Error({
           Go Home
         </button>
       </div>
-      {error.digest && (
-        <p className="text-gray-600">Error ID: {error.digest}</p>
-      )}
+      {error.digest && <p className="error-id">Error ID: {error.digest}</p>}
     </div>
   );
 }
